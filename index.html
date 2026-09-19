@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Government and public services of Kazakhstan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #EEF1F6;
+      --card: #FFFFFF;
+      --ink: #14213D;
+      --muted: #5B6680;
+      --line: #D3DAE6;
+      --accent: #1F3A8A;
+      --gold: #D9A100;
+      --chip: #E7ECF5;
+      --font: "Manrope", "Segoe UI", system-ui, sans-serif;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0F1524; --card: #182036; --ink: #E8ECF5; --muted: #9AA6C2; --line: #2A3450; --accent: #7B93FF; --chip: #24304C;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #0F1524; --card: #182036; --ink: #E8ECF5; --muted: #9AA6C2; --line: #2A3450; --accent: #7B93FF; --chip: #24304C;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); line-height: 1.5; }
+    main { max-width: 960px; margin: 0 auto; padding: 36px 20px 60px; }
+
+    header { margin-bottom: 24px; }
+    h1 { margin: 0 0 4px; font-size: 2rem; font-weight: 700; }
+    h1::before { content: ""; display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); margin-right: 12px; vertical-align: 0.05em; }
+    .lead { margin: 0 0 16px; color: var(--muted); max-width: 64ch; }
+    .search { max-width: 380px; }
+    .search input {
+      width: 100%; font: inherit; padding: 10px 14px; border-radius: 999px;
+      border: 1px solid var(--line); background: var(--card); color: var(--ink);
+    }
+    .search input:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* quick row of the services most people are looking for */
+    .quick { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 4px; }
+    .quick a {
+      padding: 7px 14px; border-radius: 999px; background: var(--accent); color: #fff;
+      text-decoration: none; font-size: 0.85rem; font-weight: 500;
+    }
+    .quick a:hover, .quick a:focus-visible { filter: brightness(1.15); outline: none; }
+
+    h2 {
+      font-size: 0.95rem; font-weight: 700; color: var(--muted);
+      margin: 28px 0 10px; padding-bottom: 6px; border-bottom: 2px solid var(--accent);
+    }
+    h2 span { color: var(--muted); font-weight: 400; margin-left: 8px; }
+
+    .list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+    .item {
+      display: block; background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+      padding: 14px 16px; color: inherit; text-decoration: none;
+    }
+    .item:hover, .item:focus-visible { border-color: var(--accent); outline: none; }
+    .item strong { display: block; font-weight: 700; margin-bottom: 2px; }
+    .item .site { color: var(--accent); font-size: 0.85rem; word-break: break-all; }
+    .item .tag { display: block; color: var(--muted); font-size: 0.8rem; margin-top: 4px; }
+
+    .numbers { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    .num { background: var(--chip); border-radius: 12px; padding: 12px 14px; }
+    .num strong { display: block; font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+    .num span { font-size: 0.82rem; color: var(--muted); }
+
+    .hidden { display: none; }
+    .none { color: var(--muted); margin-top: 28px; }
+    footer { margin-top: 40px; font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Government and public services of Kazakhstan</h1>
+      <p class="lead">Official sites of the state bodies and the online services people actually use: eGov, tax, courts, pensions, licences, procurement. Ministries link to their pages on gov.kz, the single government portal. Type to search.</p>
+      <div class="search"><input id="q" type="search" placeholder="Search: tax, court, pension, visa, licence…" aria-label="Search"></div>
+      <div class="quick">
+        <a href="https://egov.kz" target="_blank" rel="noopener">eGov portal</a>
+        <a href="https://kgd.gov.kz" target="_blank" rel="noopener">Tax &amp; customs</a>
+        <a href="https://sud.gov.kz" target="_blank" rel="noopener">Courts</a>
+        <a href="https://enpf.kz" target="_blank" rel="noopener">Pension fund</a>
+        <a href="https://adilet.zan.kz" target="_blank" rel="noopener">Laws (Adilet)</a>
+        <a href="https://nationalbank.kz" target="_blank" rel="noopener">National Bank</a>
+      </div>
+    </header>
+
+    <div id="groups"></div>
+    <p id="none" class="none hidden">No match. Try a shorter word.</p>
+
+    <h2>Emergency and help lines</h2>
+    <div class="numbers">
+      <div class="num"><strong>112</strong><span>single emergency number</span></div>
+      <div class="num"><strong>102</strong><span>police</span></div>
+      <div class="num"><strong>103</strong><span>ambulance</span></div>
+      <div class="num"><strong>101</strong><span>fire</span></div>
+      <div class="num"><strong>104</strong><span>gas leak</span></div>
+      <div class="num"><strong>1414</strong><span>eGov / public services call centre</span></div>
+      <div class="num"><strong>1401</strong><span>eGov support</span></div>
+      <div class="num"><strong>1411</strong><span>tax help line (KGD)</span></div>
+    </div>
+
+    <footer>
+      <p>Checked in September 2026 against the Prime Minister's official list of state bodies and gov.kz. The structure changed with the 2026 Constitution (in force 1 July 2026): the bicameral Parliament became the unicameral Kurultai, and Constitution Day moved to 15 March. Ministries are reorganised from time to time; gov.kz usually redirects old addresses, but if a link fails, search the body's name on gov.kz. Missing something? Add a line to the list in <code>index.html</code> and open a pull request.</p>
+    </footer>
+  </main>
+
+  <script>
+    // Each entry: name, website, group, note
+    const G = "https://www.gov.kz/memleket/entities/";
+    const ITEMS = [
+      // ---- Head of state, legislature, government ----
+      ["Akorda — President of Kazakhstan", "https://www.akorda.kz", "President, Kurultai and Government", "presidential decrees, addresses, appointments"],
+      ["Kurultai of the Republic of Kazakhstan", "https://quryltai.kz", "President, Kurultai and Government", "unicameral legislature, 145 deputies; replaced Parliament on 1 July 2026"],
+      ["Prime Minister and Government", "https://primeminister.kz", "President, Kurultai and Government", "government sessions, decrees, composition of the cabinet"],
+      ["gov.kz — single portal of state bodies", "https://www.gov.kz", "President, Kurultai and Government", "every ministry, agency and akimat has a page here"],
+      ["Central Election Commission", "https://election.gov.kz", "President, Kurultai and Government", "elections and referendums"],
+
+      // ---- Ministries (official list on primeminister.kz) ----
+      ["Ministry of Foreign Affairs", G + "mfa", "Ministries", "visas, consular services, embassies"],
+      ["Ministry of Internal Affairs", G + "qriim", "Ministries", "police, migration service, driving licences"],
+      ["Ministry of Defense", G + "mod", "Ministries", ""],
+      ["Ministry of Justice", G + "adilet", "Ministries", "civil registry, notaries, legal acts, intellectual property"],
+      ["Ministry of Finance", G + "minfin", "Ministries", "budget, treasury; parent of the State Revenue Committee"],
+      ["Ministry of National Economy", G + "economy", "Ministries", "economic policy, statistics oversight, regional development"],
+      ["Ministry of Industry and Construction", G + "miid", "Ministries", "industry, construction, housing, geology, subsoil"],
+      ["Ministry of Trade and Integration", G + "mti", "Ministries", "trade, EAEU integration, consumer protection"],
+      ["Ministry of Agriculture", G + "moa", "Ministries", ""],
+      ["Ministry of Energy", G + "energo", "Ministries", "oil, gas, electricity, nuclear"],
+      ["Ministry of Ecology and Natural Resources", G + "ecogeo", "Ministries", "environment, forestry, wildlife"],
+      ["Ministry of Water Resources and Irrigation", G + "water", "Ministries", ""],
+      ["Ministry of Transport", G + "transport", "Ministries", "roads, railways, aviation, ports"],
+      ["Ministry of Artificial Intelligence and Digital Development", G + "mdai", "Ministries", "digital government, AI, telecom, space; formed September 2025"],
+      ["Ministry of Science and Higher Education", G + "sci", "Ministries", "universities, research grants, Bolashak"],
+      ["Ministry of Education", G + "edu", "Ministries", "schools, colleges, kindergartens"],
+      ["Ministry of Healthcare", G + "dsm", "Ministries", "health system, medicines, sanitary control"],
+      ["Ministry of Labour and Social Protection", G + "enbek", "Ministries", "pensions, benefits, work permits, employment"],
+      ["Ministry of Culture and Information", G + "mam", "Ministries", "culture, media, archives, religion affairs"],
+      ["Ministry of Tourism and Sports", G + "tsm", "Ministries", ""],
+      ["Ministry of Emergency Situations", G + "emer", "Ministries", "fire service, civil defence, disaster response"],
+
+      // ---- Agencies and oversight bodies ----
+      ["Agency for Regulation and Development of the Financial Market (ARDFM)", G + "ardfm", "Agencies and oversight", "banking, insurance and securities regulator"],
+      ["Financial Monitoring Agency", G + "afm", "Agencies and oversight", "anti-money-laundering, economic crime"],
+      ["Anti-Corruption Agency", G + "anticorruption", "Agencies and oversight", "corruption reporting and investigation"],
+      ["Agency for Civil Service Affairs", G + "qyzmet", "Agencies and oversight", "public-sector recruitment and ethics"],
+      ["National Security Committee (KNB)", G + "knb", "Agencies and oversight", "security and border service"],
+      ["Supreme Audit Chamber", G + "esep", "Agencies and oversight", "audit of public spending"],
+      ["Bureau of National Statistics", "https://stat.gov.kz", "Agencies and oversight", "official statistics, census, price indices"],
+      ["Commissioner for Human Rights (Ombudsman)", G + "ombudsman", "Agencies and oversight", "complaints about rights violations by officials"],
+
+      // ---- Courts and justice ----
+      ["Constitutional Court", G + "ksrk", "Courts and justice", "citizens can apply directly since 2023"],
+      ["Supreme Court and the judicial system", "https://sud.gov.kz", "Courts and justice", "court decisions, case search, e-filing (Sud Cabinet)"],
+      ["Prosecutor General's Office", G + "prokuror", "Courts and justice", "supervision of legality, criminal prosecution"],
+      ["Adilet — legal information system", "https://adilet.zan.kz", "Courts and justice", "full text of laws, codes and decrees in Kazakh and Russian"],
+      ["Police of Kazakhstan", "https://polisia.kz", "Courts and justice", "police services, fines, wanted persons"],
+
+      // ---- Everyday services ----
+      ["eGov.kz — electronic government", "https://egov.kz", "Everyday services", "certificates, registrations, payments; eGov mobile app"],
+      ["e-Otinish — appeals to state bodies", "https://eotinish.kz", "Everyday services", "file a complaint or request with any state body"],
+      ["Government for Citizens (public service centres)", "https://gov4c.kz", "Everyday services", "in-person service centres (CON/ЦОН) and queue booking"],
+      ["National Certification Authority (PKI)", "https://pki.gov.kz", "Everyday services", "electronic digital signature (EDS) used for all eGov services"],
+      ["State Revenue Committee — tax and customs", "https://kgd.gov.kz", "Everyday services", "taxes, customs, IIN/BIN lookup, debt check"],
+      ["Taxpayer's cabinet", "https://cabinet.salyk.kz", "Everyday services", "file returns and pay taxes online"],
+      ["Electronic invoices (ESF)", "https://esf.gov.kz", "Everyday services", "electronic VAT invoices for businesses"],
+      ["e-Licence", "https://elicense.kz", "Everyday services", "licences, permits, individual-entrepreneur registration"],
+      ["Enbek.kz — electronic labour exchange", "https://enbek.kz", "Everyday services", "jobs, electronic labour contracts, social benefits"],
+      ["Unified Accumulative Pension Fund (ENPF)", "https://enpf.kz", "Everyday services", "pension account, statements, withdrawals"],
+      ["Social Health Insurance Fund", "https://fms.kz", "Everyday services", "medical insurance status and contributions"],
+      ["Public procurement portal", "https://goszakup.gov.kz", "Everyday services", "state tenders and contracts"],
+      ["National Testing Centre", "https://testcenter.kz", "Everyday services", "university entrance exam (UNT/ENT) and results"],
+      ["Bolashak scholarship", "https://bolashak.gov.kz", "Everyday services", "state scholarship for study abroad"],
+
+      // ---- Open data and finance ----
+      ["National Bank of Kazakhstan", "https://nationalbank.kz", "Finance and open data", "monetary policy, official exchange rates, banknotes"],
+      ["Astana International Financial Centre (AIFC)", "https://aifc.kz", "Finance and open data", "financial hub with its own English-law court and regulator"],
+      ["Kazakh Invest", "https://invest.gov.kz", "Finance and open data", "national investment promotion agency"],
+      ["Open data portal", "https://data.egov.kz", "Finance and open data", "datasets from state bodies"],
+      ["Open budgets", "https://budget.egov.kz", "Finance and open data", "national and local budgets"],
+      ["Open legal acts", "https://legalacts.egov.kz", "Finance and open data", "draft laws open for public comment"],
+    ];
+
+    const groups = document.getElementById("groups");
+    const byGroup = new Map();
+    for (const it of ITEMS) { if (!byGroup.has(it[2])) byGroup.set(it[2], []); byGroup.get(it[2]).push(it); }
+
+    for (const [group, list] of byGroup) {
+      const section = document.createElement("section");
+      section.innerHTML = `<h2>${group}<span>${list.length}</span></h2><div class="list"></div>`;
+      const grid = section.querySelector(".list");
+      for (const [name, url, , note] of list) {
+        const a = document.createElement("a");
+        a.className = "item";
+        a.href = url; a.target = "_blank"; a.rel = "noopener";
+        a.dataset.text = `${name} ${group} ${note}`.toLowerCase();
+        a.innerHTML = `<strong>${name}</strong><span class="site">${url.replace(/^https?:\/\/(www\.)?/, "")}</span>` +
+                      (note ? `<span class="tag">${note}</span>` : "");
+        grid.append(a);
+      }
+      groups.append(section);
+    }
+
+    document.getElementById("q").addEventListener("input", e => {
+      const q = e.target.value.trim().toLowerCase();
+      let any = false;
+      for (const section of groups.children) {
+        let shown = 0;
+        for (const card of section.querySelectorAll(".item")) {
+          const hit = !q || card.dataset.text.includes(q);
+          card.classList.toggle("hidden", !hit);
+          if (hit) shown++;
+        }
+        section.classList.toggle("hidden", shown === 0);
+        section.querySelector("h2 span").textContent = shown;
+        if (shown) any = true;
+      }
+      document.getElementById("none").classList.toggle("hidden", any);
+    });
+  </script>
+</body>
+</html>
